@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "speaker-transcriber"
+version = "0.1.0"
+description = "Transcribe audio recordings with speaker diarization (faster-whisper + Silero VAD + ECAPA-TDNN embeddings + clustering)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "numpy>=1.26",
+    "faster-whisper>=1.0",
+    "av>=12",
+    "onnxruntime>=1.17",
+    "torch>=2.0",
+    "speechbrain>=1.0",
+    "scikit-learn>=1.4",
+    "soundfile>=0.12",
+    "huggingface-hub>=0.20",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8", "piper-tts>=1.3"]
+
+[project.scripts]
+speaker-transcribe = "speaker_transcriber.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "slow: end-to-end tests that download models and synthesize audio",
+]

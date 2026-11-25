@@ -1,0 +1,379 @@
+{
+  "source": "tests/assets/conversation.mp3",
+  "language": "en",
+  "duration": 25.9645,
+  "speakers": [
+    "SPEAKER_00",
+    "SPEAKER_01"
+  ],
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 5.02,
+      "speaker": "SPEAKER_00",
+      "text": "Hi Bob, this is Alice. I wanted to talk about the project meeting tomorrow.",
+      "words": [
+        {
+          "start": 0.0,
+          "end": 0.24,
+          "text": " Hi"
+        },
+        {
+          "start": 0.24,
+          "end": 0.54,
+          "text": " Bob,"
+        },
+        {
+          "start": 0.92,
+          "end": 1.06,
+          "text": " this"
+        },
+        {
+          "start": 1.06,
+          "end": 1.38,
+          "text": " is"
+        },
+        {
+          "start": 1.38,
+          "end": 1.56,
+          "text": " Alice."
+        },
+        {
+          "start": 2.12,
+          "end": 2.28,
+          "text": " I"
+        },
+        {
+          "start": 2.28,
+          "end": 2.64,
+          "text": " wanted"
+        },
+        {
+          "start": 2.64,
+          "end": 2.88,
+          "text": " to"
+        },
+        {
+          "start": 2.88,
+          "end": 3.12,
+          "text": " talk"
+        },
+        {
+          "start": 3.12,
+          "end": 3.48,
+          "text": " about"
+        },
+        {
+          "start": 3.48,
+          "end": 3.68,
+          "text": " the"
+        },
+        {
+          "start": 3.68,
+          "end": 4.04,
+          "text": " project"
+        },
+        {
+          "start": 4.04,
+          "end": 4.48,
+          "text": " meeting"
+        },
+        {
+          "start": 4.48,
+          "end": 5.02,
+          "text": " tomorrow."
+        }
+      ]
+    },
+    {
+      "start": 5.86,
+      "end": 9.22,
+      "speaker": "SPEAKER_01",
+      "text": "Hey Alice, sure. What time works best for you in the morning?",
+      "words": [
+        {
+          "start": 5.86,
+          "end": 6.08,
+          "text": " Hey"
+        },
+        {
+          "start": 6.08,
+          "end": 6.34,
+          "text": " Alice,"
+        },
+        {
+          "start": 6.84,
+          "end": 7.06,
+          "text": " sure."
+        },
+        {
+          "start": 7.5,
+          "end": 7.62,
+          "text": " What"
+        },
+        {
+          "start": 7.62,
+          "end": 7.86,
+          "text": " time"
+        },
+        {
+          "start": 7.86,
+          "end": 8.18,
+          "text": " works"
+        },
+        {
+          "start": 8.18,
+          "end": 8.44,
+          "text": " best"
+        },
+        {
+          "start": 8.44,
+          "end": 8.66,
+          "text": " for"
+        },
+        {
+          "start": 8.66,
+          "end": 8.8,
+          "text": " you"
+        },
+        {
+          "start": 8.8,
+          "end": 8.94,
+          "text": " in"
+        },
+        {
+          "start": 8.94,
+          "end": 9.0,
+          "text": " the"
+        },
+        {
+          "start": 9.0,
+          "end": 9.22,
+          "text": " morning?"
+        }
+      ]
+    },
+    {
+      "start": 9.94,
+      "end": 13.4,
+      "speaker": "SPEAKER_00",
+      "text": "How about 9.30? We can review the slides together.",
+      "words": [
+        {
+          "start": 9.94,
+          "end": 10.16,
+          "text": " How"
+        },
+        {
+          "start": 10.16,
+          "end": 10.4,
+          "text": " about"
+        },
+        {
+          "start": 10.4,
+          "end": 10.7,
+          "text": " 9"
+        },
+        {
+          "start": 10.7,
+          "end": 11.12,
+          "text": ".30?"
+        },
+        {
+          "start": 11.5,
+          "end": 11.66,
+          "text": " We"
+        },
+        {
+          "start": 11.66,
+          "end": 11.88,
+          "text": " can"
+        },
+        {
+          "start": 11.88,
+          "end": 12.24,
+          "text": " review"
+        },
+        {
+          "start": 12.24,
+          "end": 12.52,
+          "text": " the"
+        },
+        {
+          "start": 12.52,
+          "end": 12.98,
+          "text": " slides"
+        },
+        {
+          "start": 12.98,
+          "end": 13.4,
+          "text": " together."
+        }
+      ]
+    },
+    {
+      "start": 14.28,
+      "end": 17.24,
+      "speaker": "SPEAKER_01",
+      "text": "9.30 sounds perfect. I will bring the budget report.",
+      "words": [
+        {
+          "start": 14.28,
+          "end": 14.54,
+          "text": " 9"
+        },
+        {
+          "start": 14.54,
+          "end": 14.92,
+          "text": ".30"
+        },
+        {
+          "start": 14.92,
+          "end": 15.26,
+          "text": " sounds"
+        },
+        {
+          "start": 15.26,
+          "end": 15.68,
+          "text": " perfect."
+        },
+        {
+          "start": 16.06,
+          "end": 16.16,
+          "text": " I"
+        },
+        {
+          "start": 16.16,
+          "end": 16.3,
+          "text": " will"
+        },
+        {
+          "start": 16.3,
+          "end": 16.5,
+          "text": " bring"
+        },
+        {
+          "start": 16.5,
+          "end": 16.66,
+          "text": " the"
+        },
+        {
+          "start": 16.66,
+          "end": 16.86,
+          "text": " budget"
+        },
+        {
+          "start": 16.86,
+          "end": 17.24,
+          "text": " report."
+        }
+      ]
+    },
+    {
+      "start": 17.92,
+      "end": 21.74,
+      "speaker": "SPEAKER_00",
+      "text": "Great. See you then. Thanks for your help with the presentation.",
+      "words": [
+        {
+          "start": 17.92,
+          "end": 18.24,
+          "text": " Great."
+        },
+        {
+          "start": 18.64,
+          "end": 18.76,
+          "text": " See"
+        },
+        {
+          "start": 18.76,
+          "end": 19.02,
+          "text": " you"
+        },
+        {
+          "start": 19.02,
+          "end": 19.32,
+          "text": " then."
+        },
+        {
+          "start": 19.7,
+          "end": 20.04,
+          "text": " Thanks"
+        },
+        {
+          "start": 20.04,
+          "end": 20.24,
+          "text": " for"
+        },
+        {
+          "start": 20.24,
+          "end": 20.38,
+          "text": " your"
+        },
+        {
+          "start": 20.38,
+          "end": 20.64,
+          "text": " help"
+        },
+        {
+          "start": 20.64,
+          "end": 20.9,
+          "text": " with"
+        },
+        {
+          "start": 20.9,
+          "end": 21.06,
+          "text": " the"
+        },
+        {
+          "start": 21.06,
+          "end": 21.74,
+          "text": " presentation."
+        }
+      ]
+    },
+    {
+      "start": 22.56,
+      "end": 25.1,
+      "speaker": "SPEAKER_01",
+      "text": "Anytime. Talk to you tomorrow morning, Alice.",
+      "words": [
+        {
+          "start": 22.56,
+          "end": 22.86,
+          "text": " Anytime."
+        },
+        {
+          "start": 23.4,
+          "end": 23.56,
+          "text": " Talk"
+        },
+        {
+          "start": 23.56,
+          "end": 23.74,
+          "text": " to"
+        },
+        {
+          "start": 23.74,
+          "end": 23.84,
+          "text": " you"
+        },
+        {
+          "start": 23.84,
+          "end": 24.12,
+          "text": " tomorrow"
+        },
+        {
+          "start": 24.12,
+          "end": 24.56,
+          "text": " morning,"
+        },
+        {
+          "start": 24.92,
+          "end": 25.1,
+          "text": " Alice."
+        }
+      ]
+    }
+  ]
+}
