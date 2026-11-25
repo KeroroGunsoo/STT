@@ -32,13 +32,22 @@ def transcribe(
     beam_size: int = 5,
     vad_filter: bool = True,
     models_dir: str | Path | None = None,
+    hotwords: list[str] | None = None,
+    initial_prompt: str | None = None,
+    vocabulary: list[str] | None = None,
+    vocab_threshold: float = 0.92,
 ) -> tuple[list[Segment], str | None]:
     """Transcribe a 16 kHz mono waveform with faster-whisper.
 
     Returns (segments, detected_language). Segments carry word-level
-    timestamps when ``word_timestamps`` is enabled.
+    timestamps when ``word_timestamps`` is enabled. ``vocabulary`` triggers
+    fuzzy post-correction of mis-heard words against a domain term list
+    (``hotwords``/``initial_prompt`` are accepted but not used by the default
+    pipeline: with faster-whisper they can collapse segment boundaries).
     """
     from faster_whisper import WhisperModel
+
+    from .context import correct_text
 
     if compute_type is None:
         compute_type = "float16" if device == "cuda" else "int8"
@@ -46,12 +55,16 @@ def transcribe(
     if models_dir is not None:
         kwargs["download_root"] = str(Path(models_dir) / "asr")
     whisper = WhisperModel(model, **kwargs)
+    if isinstance(hotwords, (list, tuple)):
+        hotwords = ", ".join(hotwords)
     segments, info = whisper.transcribe(
         np.asarray(waveform, dtype=np.float32),
         language=language,
         word_timestamps=word_timestamps,
         beam_size=beam_size,
         vad_filter=vad_filter,
+        hotwords=hotwords,
+        initial_prompt=initial_prompt,
     )
     out: list[Segment] = []
     for seg in segments:
@@ -60,5 +73,9 @@ def transcribe(
             if word_timestamps and seg.words
             else []
         )
-        out.append(Segment(float(seg.start), float(seg.end), seg.text.strip(), words))
+        text = seg.text.strip()
+        if vocabulary:
+            text = correct_text(text, vocabulary, threshold=vocab_threshold)
+            words = [Word(w.start, w.end, correct_text(w.text, vocabulary, threshold=vocab_threshold)) for w in words]
+        out.append(Segment(float(seg.start), float(seg.end), text, words))
     return out, info.language

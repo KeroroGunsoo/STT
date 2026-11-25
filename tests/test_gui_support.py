@@ -11,7 +11,7 @@ from speaker_transcriber.pipeline import Transcript, TranscriptSegment
 
 def test_options_to_kwargs_defaults():
     kw = options_to_kwargs(GuiOptions(input_path="a.mp3"))
-    assert kw == {"model": "base", "device": "cpu", "cluster_threshold": 0.30}
+    assert kw == {"model": "base", "device": "cpu", "cluster_threshold": 0.35}
 
 
 def test_options_to_kwargs_overrides():
@@ -27,6 +27,12 @@ def test_options_to_kwargs_overrides():
 def test_options_to_kwargs_speakers_zero_means_auto():
     kw = options_to_kwargs(GuiOptions(num_speakers=0))
     assert "num_speakers" not in kw
+
+
+def test_options_to_kwargs_context_dir():
+    assert "context_dir" not in options_to_kwargs(GuiOptions())
+    kw = options_to_kwargs(GuiOptions(context_dir="C:/thesis"))
+    assert kw["context_dir"] == "C:/thesis"
 
 
 def test_resolve_output_dir(tmp_path):

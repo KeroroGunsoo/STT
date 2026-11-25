@@ -51,8 +51,31 @@ Outputs (written next to the input, or into `-o DIR`):
 
 Useful flags: `--model` (tiny/base/small/medium/large-v3, default `base`),
 `--language` (default auto-detect), `--num-speakers` (force a count; default
-estimated by clustering with `--cluster-threshold 0.30`), `--vad-threshold`,
+estimated by clustering with `--cluster-threshold 0.35`), `--vad-threshold`,
 `--min-silence`, `--no-word-timestamps`, `--formats txt,srt`, `-q`.
+
+## Context-aware transcription (PhD project folder)
+
+Point the app at your project folder and it will use your documents to get
+domain-specific words right:
+
+```bash
+speaker-transcribe defense.mp3 --context-dir "C:\Users\You\phd-thesis"
+```
+
+(or the "Context folder" field in the GUI). The folder is scanned for text
+documents (`.md`, `.txt`, `.tex`, `.bib`, `.py`, `.docx`, `.odt`, …); a
+vocabulary of technical terms, acronyms and names is built (case-insensitive,
+stop-words removed, most frequent first, capped at 300 terms). Every
+transcribed word that is **not** itself in the vocabulary is fuzzy-matched
+against it (ratio ≥ `--vocab-threshold`, default 0.92, min length 5) and
+replaced with the closest domain term — so a mis-heard "jenneration" becomes
+"generation", "bert" becomes "BERT", etc., preserving punctuation and casing.
+This runs after decoding (word-level timestamps are kept intact), which keeps
+segment boundaries stable.
+
+The JSON/txt outputs record which context was used (`context` field / `# context:`
+header), so you can see how many terms were picked up from your folder.
 
 ## Desktop GUI
 

@@ -24,8 +24,10 @@ def to_txt(transcript: Transcript) -> str:
         f"# duration: {_ts_txt(transcript.duration)}",
         f"# language: {transcript.language or 'unknown'}",
         f"# speakers: {', '.join(transcript.speakers)}",
-        "",
     ]
+    if transcript.context:
+        lines.append(f"# context: {transcript.context.get('num_terms', 0)} terms from {transcript.context.get('source_dir', '')}")
+    lines.append("")
     for seg in transcript.segments:
         lines.append(f"[{_ts_txt(seg.start)}] {seg.speaker}: {seg.text}")
     return "\n".join(lines) + "\n"

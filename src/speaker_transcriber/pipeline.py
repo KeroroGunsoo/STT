@@ -10,6 +10,7 @@ import numpy as np
 from .align import assign_speakers
 from .asr import Segment, transcribe as asr_transcribe
 from .audio import load_audio
+from .context import build_profile
 from .diarization import diarize
 from .embeddings import SpeakerEmbedder
 from .vad import SileroVAD, get_vad_model_path
@@ -38,6 +39,7 @@ class Transcript:
     duration: float
     speakers: list[str]
     segments: list[TranscriptSegment]
+    context: dict | None = None
 
     def to_dict(self) -> dict:
         return {
@@ -46,6 +48,7 @@ class Transcript:
             "duration": self.duration,
             "speakers": self.speakers,
             "segments": [s.to_dict() for s in self.segments],
+            "context": self.context,
         }
 
     @property
@@ -65,7 +68,7 @@ def transcribe_file(
     device: str = "cpu",
     compute_type: str | None = None,
     num_speakers: int | None = None,
-    cluster_threshold: float = 0.30,
+    cluster_threshold: float = 0.35,
     vad_threshold: float = 0.5,
     min_silence_s: float = 0.3,
     min_speech_s: float = 0.25,
@@ -76,6 +79,8 @@ def transcribe_file(
     sample_rate: int = 16000,
     models_dir: str | Path | None = None,
     vad_model_path: str | Path | None = None,
+    context_dir: str | Path | None = None,
+    vocab_threshold: float = 0.92,
     log: Callable[..., None] = _noop,
 ) -> Transcript:
     """Transcribe an audio file with speaker labels.
@@ -96,6 +101,11 @@ def transcribe_file(
     duration = len(waveform) / sample_rate
     log(f"Audio: {duration:.1f}s at {sample_rate} Hz mono")
 
+    profile = None
+    if context_dir is not None:
+        profile = build_profile(context_dir)
+        log(f"Context: {len(profile.terms)} domain terms from {context_dir}")
+
     log(f"Transcribing with faster-whisper model '{model}' ({device})...")
     segments, detected_language = asr_transcribe(
         waveform,
@@ -106,6 +116,8 @@ def transcribe_file(
         word_timestamps=word_timestamps,
         beam_size=beam_size,
         models_dir=models_dir,
+        vocabulary=profile.terms if profile else None,
+        vocab_threshold=vocab_threshold,
     )
     log(f"ASR produced {len(segments)} segment(s), language={detected_language}")
 
@@ -145,4 +157,5 @@ def transcribe_file(
         duration=duration,
         speakers=speakers,
         segments=t_segments,
+        context=profile.to_dict() if profile else None,
     )

@@ -24,11 +24,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--device", default="cpu", help="cpu or cuda (default: cpu)")
     p.add_argument("--compute-type", default=None, help="faster-whisper compute type (default: int8 on cpu, float16 on cuda)")
     p.add_argument("--num-speakers", type=int, default=None, help="Force this many speakers (default: estimated by clustering)")
-    p.add_argument("--cluster-threshold", type=float, default=0.30, help="Cosine-distance threshold for speaker clustering (default: 0.30)")
+    p.add_argument("--cluster-threshold", type=float, default=0.35, help="Cosine-distance threshold for speaker clustering (default: 0.35)")
     p.add_argument("--vad-threshold", type=float, default=0.5, help="Silero VAD speech probability threshold (default: 0.5)")
     p.add_argument("--min-silence", type=float, default=0.3, help="Merge speech regions separated by less than this many seconds (default: 0.3)")
     p.add_argument("--no-word-timestamps", action="store_true", help="Disable word-level timestamps (faster, coarser speaker assignment)")
     p.add_argument("--formats", default="txt,json,srt", help="Comma-separated output formats: txt,json,srt (default: txt,json,srt)")
+    p.add_argument("--context-dir", default=None, help="Folder with project documents (e.g. your PhD thesis: .md/.tex/.bib/.docx/...) used to bias transcription toward domain terms and fix mis-heard words")
+    p.add_argument("--vocab-threshold", type=float, default=0.92, help="Fuzzy-match threshold for context-based word correction (default: 0.92)")
     p.add_argument("--models-dir", default=None, help="Where to cache downloaded models (default: ~/.cache/speaker_transcriber)")
     p.add_argument("-q", "--quiet", action="store_true", help="Suppress progress on stderr and the transcript on stdout")
     return p
@@ -50,6 +52,8 @@ def main(argv: list[str] | None = None) -> int:
         min_silence_s=args.min_silence,
         word_timestamps=not args.no_word_timestamps,
         models_dir=args.models_dir,
+        context_dir=args.context_dir,
+        vocab_threshold=args.vocab_threshold,
         log=log,
     )
 

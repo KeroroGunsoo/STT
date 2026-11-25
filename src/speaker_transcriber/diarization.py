@@ -37,7 +37,7 @@ def build_windows(
 def cluster_embeddings(
     emb: np.ndarray,
     num_speakers: int | None = None,
-    threshold: float = 0.30,
+    threshold: float = 0.35,
 ) -> np.ndarray:
     """Cluster L2-normalized embeddings with agglomerative clustering (cosine).
 
@@ -100,7 +100,7 @@ def diarize(
     window_s: float = 3.0,
     hop_s: float = 1.5,
     num_speakers: int | None = None,
-    cluster_threshold: float = 0.30,
+    cluster_threshold: float = 0.35,
     merge_gap_s: float = 0.75,
 ) -> list[tuple[float, float, str]]:
     """Full diarization: VAD -> embedding windows -> clustering -> speaker turns."""

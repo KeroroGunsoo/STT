@@ -42,12 +42,16 @@ class TranscriberApp:
         top.pack(fill="x", **pad)
         self.vars["input"] = tk.StringVar()
         self.vars["outdir"] = tk.StringVar()
+        self.vars["context_dir"] = tk.StringVar()
         ttk.Label(top, text="Audio file:").grid(row=0, column=0, sticky="w")
         ttk.Entry(top, textvariable=self.vars["input"], width=62).grid(row=0, column=1, sticky="we")
         ttk.Button(top, text="Browse…", command=self._browse_input).grid(row=0, column=2)
         ttk.Label(top, text="Output dir:").grid(row=1, column=0, sticky="w")
         ttk.Entry(top, textvariable=self.vars["outdir"], width=62).grid(row=1, column=1, sticky="we")
         ttk.Button(top, text="Browse…", command=self._browse_outdir).grid(row=1, column=2)
+        ttk.Label(top, text="Context folder (e.g. PhD project, optional):").grid(row=2, column=0, sticky="w")
+        ttk.Entry(top, textvariable=self.vars["context_dir"], width=62).grid(row=2, column=1, sticky="we")
+        ttk.Button(top, text="Browse…", command=self._browse_context).grid(row=2, column=2)
         top.columnconfigure(1, weight=1)
 
         opts = ttk.LabelFrame(self.root, text="Options")
@@ -56,7 +60,7 @@ class TranscriberApp:
         self.vars["language"] = tk.StringVar(value="")
         self.vars["device"] = tk.StringVar(value="cpu")
         self.vars["num_speakers"] = tk.IntVar(value=0)
-        self.vars["cluster_threshold"] = tk.DoubleVar(value=0.30)
+        self.vars["cluster_threshold"] = tk.DoubleVar(value=0.35)
         self.vars["formats"] = {f: tk.BooleanVar(value=True) for f in FORMAT_CHOICES}
         ttk.Label(opts, text="Model:").grid(row=0, column=0, sticky="w")
         ttk.Combobox(opts, textvariable=self.vars["model"], values=MODEL_CHOICES, state="readonly", width=12).grid(row=0, column=1, sticky="w")
@@ -111,10 +115,16 @@ class TranscriberApp:
         if chosen:
             self.vars["outdir"].set(chosen)
 
+    def _browse_context(self) -> None:
+        chosen = filedialog.askdirectory(title="Choose project folder for transcription context")
+        if chosen:
+            self.vars["context_dir"].set(chosen)
+
     def _collect(self) -> GuiOptions:
         return GuiOptions(
             input_path=self.vars["input"].get().strip(),
             output_dir=self.vars["outdir"].get().strip(),
+            context_dir=self.vars["context_dir"].get().strip(),
             model=self.vars["model"].get(),
             language=self.vars["language"].get(),
             device=self.vars["device"].get(),

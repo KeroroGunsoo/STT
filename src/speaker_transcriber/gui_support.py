@@ -16,11 +16,12 @@ SPEAKER_COLORS = [
 class GuiOptions:
     input_path: str = ""
     output_dir: str = ""
+    context_dir: str = ""
     model: str = "base"
     language: str = ""
     device: str = "cpu"
     num_speakers: int = 0
-    cluster_threshold: float = 0.30
+    cluster_threshold: float = 0.35
     formats: tuple[str, ...] = ("txt", "json", "srt")
 
 
@@ -36,6 +37,8 @@ def options_to_kwargs(opts: GuiOptions) -> dict:
         kwargs["language"] = language
     if opts.num_speakers and opts.num_speakers > 0:
         kwargs["num_speakers"] = int(opts.num_speakers)
+    if opts.context_dir.strip():
+        kwargs["context_dir"] = opts.context_dir.strip()
     return kwargs
 
 
