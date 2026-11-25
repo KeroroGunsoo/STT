@@ -1,8 +1,9 @@
-# STT
+# speaker-transcriber
 
-Speech-to-text app that runs on your PC. Give it a recording (mp3, wav, m4a,
-mp4, flac, ogg, ...), it identifies the different speakers (diarization), and
-produces a timestamped transcription with speaker labels.
+Transcribe an audio recording **and label who said what**. The app takes any
+recording (mp3, wav, m4a, mp4, flac, ogg, ...), identifies the different
+speakers (diarization), and produces a timestamped transcription with speaker
+labels.
 
 ## How it works
 
@@ -53,6 +54,19 @@ Useful flags: `--model` (tiny/base/small/medium/large-v3, default `base`),
 estimated by clustering with `--cluster-threshold 0.30`), `--vad-threshold`,
 `--min-silence`, `--no-word-timestamps`, `--formats txt,srt`, `-q`.
 
+## Desktop GUI
+
+```bash
+speaker-transcribe-gui        # or: python -m speaker_transcriber.gui
+```
+
+Tkinter-based desktop app: pick an audio file, adjust options (model, language,
+speaker count, cluster threshold, output formats), hit **Transcribe**. The
+transcript appears with each speaker in a different color, and the
+`.txt`/`.srt`/`.json` files are written to the output folder. Tk ships with the
+python.org installers on Windows/macOS; on Linux install the `python3-tk`
+package. First run downloads the models (see log pane).
+
 ### Python API
 
 ```python
@@ -73,11 +87,9 @@ python -m pytest tests                 # everything, incl. end-to-end
 
 The slow tests synthesize a two-speaker conversation with
 [piper-tts](scripts/make_test_audio.py) (`python scripts/make_test_audio.py
-tests/assets/conversation.wav`) and verify that the pipeline detects both
-speakers and transcribes them correctly. To try it manually on that sample:
-`speaker-transcribe tests/assets/conversation.wav -o demo_out` (piper-tts is
-installed with the `test` extra; binary sample audio is generated, not
-checked in).
+out.wav`) and verify that the pipeline detects both speakers and transcribes
+them correctly. A ready-made sample is in `tests/assets/conversation.wav` /
+`.mp3`, with example output in `demo_out/`.
 
 ## Notes
 
