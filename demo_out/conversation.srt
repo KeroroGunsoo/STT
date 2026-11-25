@@ -1,0 +1,23 @@
+1
+00:00:00,000 --> 00:00:05,020
+[SPEAKER_00] Hi Bob, this is Alice. I wanted to talk about the project meeting tomorrow.
+
+2
+00:00:05,860 --> 00:00:09,220
+[SPEAKER_01] Hey Alice, sure. What time works best for you in the morning?
+
+3
+00:00:09,940 --> 00:00:13,400
+[SPEAKER_00] How about 9.30? We can review the slides together.
+
+4
+00:00:14,280 --> 00:00:17,240
+[SPEAKER_01] 9.30 sounds perfect. I will bring the budget report.
+
+5
+00:00:17,920 --> 00:00:21,740
+[SPEAKER_00] Great. See you then. Thanks for your help with the presentation.
+
+6
+00:00:22,560 --> 00:00:25,100
+[SPEAKER_01] Anytime. Talk to you tomorrow morning, Alice.
