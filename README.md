@@ -73,9 +73,11 @@ python -m pytest tests                 # everything, incl. end-to-end
 
 The slow tests synthesize a two-speaker conversation with
 [piper-tts](scripts/make_test_audio.py) (`python scripts/make_test_audio.py
-out.wav`) and verify that the pipeline detects both speakers and transcribes
-them correctly. A ready-made sample is in `tests/assets/conversation.wav` /
-`.mp3`, with example output in `demo_out/`.
+tests/assets/conversation.wav`) and verify that the pipeline detects both
+speakers and transcribes them correctly. To try it manually on that sample:
+`speaker-transcribe tests/assets/conversation.wav -o demo_out` (piper-tts is
+installed with the `test` extra; binary sample audio is generated, not
+checked in).
 
 ## Notes
 
