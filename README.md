@@ -122,3 +122,6 @@ them correctly. A ready-made sample is in `tests/assets/conversation.wav` /
   same voice throughout the file. Relabeling to real names is out of scope.
 - `--num-speakers` helps when clustering under/over-segments; otherwise tune
   `--cluster-threshold` (lower = more speakers).
+- Windows note: model files are copied into the cache with plain file copies
+  (never symlinked/hard-linked), which avoids `WinError 1314` from
+  speechbrain's default symlink strategy.

@@ -1,10 +1,29 @@
 from __future__ import annotations
 
+import shutil
 from pathlib import Path
 
 import numpy as np
 
 ECAPA_SOURCE = "speechbrain/spkrec-ecapa-voxceleb"
+
+
+def prepare_ecapa_dir(models_dir: str | Path) -> Path:
+    """Make the ECAPA checkpoint available in our own cache dir.
+
+    Downloads via huggingface_hub and copies with plain file copies (no
+    symlinks/hard links): speechbrain's default LocalStrategy.SYMLINK fails
+    on Windows with WinError 1314 (privilege not held), so we never let it
+    link from the HF cache — we load from this local directory directly.
+    """
+    from huggingface_hub import snapshot_download
+
+    dest = Path(models_dir) / "ecapa-voxceleb"
+    if not (dest / "hyperparams.yaml").exists():
+        snapshot = Path(snapshot_download(ECAPA_SOURCE))
+        dest.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(snapshot, dest, dirs_exist_ok=True, ignore=shutil.ignore_patterns(".no_exist"))
+    return dest
 
 
 class SpeakerEmbedder:
@@ -16,9 +35,10 @@ class SpeakerEmbedder:
 
         self.torch = torch
         self.device = device
+        local = prepare_ecapa_dir(models_dir)
         self.clf = EncoderClassifier.from_hparams(
-            source=ECAPA_SOURCE,
-            savedir=str(Path(models_dir) / "ecapa-voxceleb"),
+            source=str(local),
+            savedir=str(local),
             run_opts={"device": device},
         )
 
